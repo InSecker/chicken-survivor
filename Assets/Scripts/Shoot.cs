@@ -27,6 +27,7 @@ public class Shoot : MonoBehaviour
             Debug.Log("ok");
             GameObject bullet = GameObject.Instantiate(ObjPrefabs);
             Vector3 persoPos = GameObject.Find("Personnage").transform.position;
+            persoPos.z += 0.5f;
             bullet.transform.position = persoPos;
             IsLoaded = false;
             Debug.Log("wait");

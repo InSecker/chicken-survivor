@@ -5,11 +5,12 @@ using UnityEngine;
 public class PersoMoveEndlessRunner : MonoBehaviour
 {
     public float Speed = 1;
+    public float DureeBonusFly = 3;
     
     Rigidbody rb;
     
     public float JumpFactor = 1;
-    bool IsJumping = false;
+    bool isJumping = false;
 
     // Start is called before the first frame update
     void Start()
@@ -26,15 +27,31 @@ public class PersoMoveEndlessRunner : MonoBehaviour
         rb.MovePosition(posArrivee);
 
         float jumpVal = Input.GetAxis("Jump");
-        if (!IsJumping && jumpVal > 0.1f) {
-            IsJumping = true;
+        if (!isJumping && jumpVal > 0.1f) {
+            isJumping = true;
             rb.AddForce(Vector3.up * JumpFactor, ForceMode.VelocityChange);
         }
+    }
 
+    public void DoFly() {
+        isJumping = true;
+        rb.AddForce(Vector3.up * JumpFactor, ForceMode.VelocityChange);
+        Invoke("Freeze", 0.8f);
+    }
+
+    void Freeze() {
+        rb.velocity = Vector3.zero;
+        rb.useGravity = false;
+        Invoke("GravityOn", DureeBonusFly);
+    }
+
+    void GravityOn() {
+        Debug.Log("gravityOn");
+        rb.useGravity = true;
     }
 
     public void HitGround() {
-        IsJumping = false;
+        isJumping = false;
     }
 
 }

@@ -11,23 +11,23 @@ public class Life : MonoBehaviour
     public Text TxtLife; 
 
     void Start() {
-        TxtLife.text = "Vies : " + LifeCount;
+        TxtLife.text = "Life : " + LifeCount;
     }
 
     public void AddLife() {
         LifeCount++;
 
-        TxtLife.text = "Vies : " + LifeCount;
+        TxtLife.text = "Life : " + LifeCount;
     }
 
     public void RemoveLife() {
         LifeCount--;
 
-        TxtLife.text = "Vies : " + LifeCount;
+        TxtLife.text = "Life : " + LifeCount;
 
         if (LifeCount <= 0) {
             // Recharger la scène
-            SceneManager.LoadScene("Lose");
+            SceneManager.LoadScene("SceneStartScreen");
 
         }
     }
